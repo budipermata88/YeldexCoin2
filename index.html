@@ -21,7 +21,7 @@
             background-image: url('yeldex2.jpg');
             background-attachment: fixed;
             background-size: cover;
-            background-position: center center;
+            background-position: center center; /* Default for desktop */
             background-repeat: no-repeat;
             background-color: #000000; 
         } 
@@ -31,7 +31,7 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            position: sticky; 
+            position: sticky; /* Already sticky */
             top: 0; 
             z-index: 1000; 
         } 
@@ -437,7 +437,8 @@
             body {
                 background-size: contain;
                 background-repeat: no-repeat;
-                background-position: center top;
+                /* REVISION: Adjust background-position for mobile */
+                background-position: center 80px; /* Shift down by 80px */
             }
 
             header { 
@@ -445,7 +446,10 @@
                 flex-wrap: nowrap;
                 justify-content: space-between;
                 align-items: center;
-                position: relative; 
+                position: sticky; /* Keep it sticky */
+                top: 0; /* Ensure it sticks to the top */
+                width: 100%; /* Ensure it spans full width */
+                box-sizing: border-box; /* Include padding in width */
             }
             
             .logo-container {
@@ -466,8 +470,8 @@
                 flex-direction: column;
                 width: 100%;
                 background-color: rgba(0,0,0,0.95);
-                position: absolute;
-                top: 70px;
+                position: absolute; /* Position relative to header */
+                top: 70px; /* Place it below the header */
                 left: 0;
                 padding: 10px 0;
             }
