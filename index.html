@@ -36,19 +36,36 @@
             z-index: 1000; 
         } 
         
+        /* REVISION: Changed logo-container to be an anchor tag and added styles */
         .logo-container {
             display: flex;
             align-items: center;
+            text-decoration: none; /* Removes underline from link */
         }
         .logo-gif {
             width: 40px;
             height: 40px;
             margin-right: 10px;
         }
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
         .logo { 
             font-size: 1.8em; 
             font-weight: bold; 
             color: #FFD700; 
+            line-height: 1.1;
+        }
+        /* REVISION: Added styles for the new subtitle */
+        .logo-subtitle {
+            font-size: 9px;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
         }
         
         nav ul { 
@@ -80,7 +97,6 @@
             text-align: center;
             padding: 20px;
             overflow: hidden;
-            /* === KODE REVISI: Latar belakang hero section dibuat transparan tanpa gambar === */
             background-color: transparent; 
         }
 
@@ -437,7 +453,6 @@
             body {
                 background-size: contain;
                 background-repeat: no-repeat;
-                /* REVISION: Adjust background-position for mobile */
                 background-position: center 80px; /* Shift down by 80px */
             }
 
@@ -539,10 +554,14 @@
              .logo-gif {
                  width: 25px;
                  height: 25px;
-                 margin-right: 3px;
+                 margin-right: 8px; /* Slightly more space */
              }
              .logo {
-                 font-size: 1.2em;
+                 font-size: 1.4em; /* Adjusted for better fit */
+             }
+             /* REVISION: Hide subtitle on very small screens to avoid clutter */
+             .logo-subtitle {
+                 display: none;
              }
         }
 
@@ -551,10 +570,15 @@
 <body>
 
     <header>
-        <div class="logo-container">
+        <!-- REVISION: The entire logo block is now a clickable link that reloads the page -->
+        <a href="#" onclick="window.location.reload(); return false;" class="logo-container">
             <img src="logo-animasi.gif" alt="Yeldex Coin Animation" class="logo-gif">
-            <div class="logo">YELDEX</div>
-        </div>
+            <div class="logo-text-wrapper">
+                <div class="logo">YELDEX</div>
+                <!-- REVISION: Added the subtitle -->
+                <div class="logo-subtitle">THE NEXT-GEN DEFI PLATFORM</div>
+            </div>
+        </a>
         <button class="menu-toggle" id="mobile-menu" aria-label="Open navigation menu" aria-expanded="false">
             &#9776; 
         </button>
@@ -626,17 +650,17 @@
                     <p>Maximize your returns by providing liquidity and farming $YLDX rewards.</p>
                 </div>
                 <div class="feature-item">
-                     <div style="font-size: 2em; margin-bottom: 10px;">🔒</div>
+                    <div style="font-size: 2em; margin-bottom: 10px;">🔒</div>
                     <h3>Staking Pools</h3>
                     <p>Stake your $YLDX tokens to earn passive income and platform rewards.</p>
                 </div>
                 <div class="feature-item">
-                     <div style="font-size: 2em; margin-bottom: 10px;">📜</div>
+                    <div style="font-size: 2em; margin-bottom: 10px;">📜</div>
                     <h3>Advanced Smart Contracts</h3>
                     <p>Benefit from auto-compounding features and impermanent loss protection.</p>
                 </div>
                 <div class="feature-item">
-                     <div style="font-size: 2em; margin-bottom: 10px;">💎</div>
+                    <div style="font-size: 2em; margin-bottom: 10px;">💎</div>
                     <h3>$YLDX Token Utility</h3>
                     <p>Powering rewards, staking, governance, and exclusive APR boosts.</p>
                 </div>
