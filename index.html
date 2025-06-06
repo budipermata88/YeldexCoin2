@@ -462,6 +462,7 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
         .fade-in-section.is-visible {
             opacity: 1;
@@ -895,37 +896,53 @@
                 });
             }
 
-            // REVISION: Logic for click and scroll reveal
-            const heroContent = document.querySelector('.hero-content.fade-in-section');
+            // --- REVISED REVEAL SCRIPT ---
             const allFadeInSections = document.querySelectorAll('.fade-in-section');
+            const heroContent = document.querySelector('.hero-content.fade-in-section');
+            
+            // 1. Special handling for Hero Content
+            if (heroContent) {
+                let heroHasBeenRevealed = false;
 
-            // Function to reveal hero on first click, then it's removed.
-            const revealHeroOnClick = () => {
-                heroContent.classList.add('is-visible');
-            };
-            window.addEventListener('click', revealHeroOnClick, { once: true });
+                const revealHeroOnce = () => {
+                    if (heroHasBeenRevealed) return; // Exit if already run
+                    heroHasBeenRevealed = true;
+                    heroContent.classList.add('is-visible');
 
-            // Intersection Observer for scroll-based reveal
+                    // Clean up both listeners to stop them from running again
+                    window.removeEventListener('scroll', revealHeroOnce);
+                    window.removeEventListener('click', revealHeroOnce);
+                };
+
+                // Add listeners that will call the same cleanup function
+                window.addEventListener('scroll', revealHeroOnce);
+                window.addEventListener('click', revealHeroOnce);
+            }
+            
+            // 2. Handling for all other sections
             const observerOptions = {
-                root: null, 
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 
+                threshold: 0.1
             };
 
             const observerCallback = (entries, observer) => {
                 entries.forEach(entry => {
+                    // Skip the hero element because it's handled separately
+                    if (entry.target === heroContent) {
+                        return;
+                    }
+
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // If hero is revealed by scroll, remove the now-redundant click listener
-                        if (entry.target === heroContent) {
-                            window.removeEventListener('click', revealHeroOnClick);
-                        }
                         observer.unobserve(entry.target);
                     }
                 });
             };
-
+            
             const observer = new IntersectionObserver(observerCallback, observerOptions);
+            
+            // Observe all sections. The callback will filter out the hero.
             allFadeInSections.forEach(el => {
                 observer.observe(el);
             });
