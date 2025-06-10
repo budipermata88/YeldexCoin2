@@ -1,1252 +1,939 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yeldex - DeFi Redefined on BSC</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeldex - The Next-Gen Defi Platform</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#ffd700" />
-    <meta name="theme-color" content="#000000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffd700">
+    <meta name="theme-color" content="#000000">
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #f0f0f0;
-        background-image: url("https://images.unsplash.com/photo-1639755291071-616149292814?q=80&w=2070&auto=format&fit=crop");
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center center; /* Default for desktop */
-        background-repeat: no-repeat;
-        background-color: #000000;
-      }
-      header {
-        background-color: rgba(0, 0, 0, 0.85);
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky; /* Already sticky */
-        top: 0;
-        z-index: 1000;
-      }
-
-      .logo-container {
-        display: flex;
-        align-items: center;
-        text-decoration: none; /* Removes underline from link */
-      }
-      .logo-gif {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-      }
-      .logo-text-wrapper {
-        display: flex;
-        flex-direction: column;
-        line-height: 1;
-      }
-      .logo {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: #ffd700;
-        line-height: 1.1;
-      }
-      .logo-subtitle {
-        font-size: 9px;
-        color: #b0b0b0;
-        text-transform: uppercase;
-        font-weight: 300;
-        letter-spacing: 0.5px;
-        margin-top: 3px;
-      }
-
-      nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-      }
-      nav ul li {
-        margin-left: 20px;
-      }
-      nav ul li a {
-        text-decoration: none;
-        color: #f0f0f0;
-        font-weight: bold;
-        transition: color 0.3s ease;
-      }
-      nav ul li a:hover {
-        color: #ffd700;
-      }
-
-      .menu-toggle {
-        display: none;
-        font-size: 2em;
-        color: #ffd700;
-        cursor: pointer;
-        background: none;
-        border: none;
-      }
-
-      .hero {
-        position: relative;
-        height: 95vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        padding-top: 8vh;
-        box-sizing: border-box;
-        overflow: hidden;
-        background-color: transparent;
-      }
-
-      .hero-content {
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 30px;
-        border-radius: 10px;
-      }
-
-      .hero h1 {
-        font-size: 3em;
-        margin-bottom: 20px;
-        color: #fff;
-      }
-      .hero p {
-        font-size: 1.2em;
-        margin-bottom: 30px;
-        color: #ddd;
-      }
-      .btn {
-        background-color: #ffd700;
-        color: #121212;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        margin: 5px;
-        display: inline-block;
-      }
-      .btn:hover {
-        background-color: #e6c300;
-        color: #121212;
-        transform: translateY(-2px);
-      }
-      .btn-secondary {
-        background-color: transparent;
-        border: 2px solid #ffd700;
-        color: #ffd700;
-      }
-      .btn-secondary:hover {
-        background-color: #ffd700;
-        color: #121212;
-        transform: translateY(-2px);
-      }
-
-      .hero-socials {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 25px;
-      }
-      .hero-socials a {
-        display: inline-block;
-        width: 28px;
-        height: 28px;
-        transition: transform 0.3s ease;
-      }
-      .hero-socials a:hover {
-        transform: scale(1.15);
-      }
-      .hero-socials svg {
-        width: 100%;
-        height: 100%;
-        fill: #f0f0f0;
-        transition: fill 0.3s ease;
-      }
-      .hero-socials a:hover svg {
-        fill: #ffd700;
-      }
-
-      .section {
-        padding: 60px 20px;
-        text-align: center;
-        background-color: transparent;
-      }
-      .section h2 {
-        font-size: 2.5em;
-        margin-bottom: 40px;
-        color: #ffd700;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-      }
-
-      #image-banner-yeldex2 {
-        background-image: none;
-        background-color: transparent;
-        height: 30vh;
-        padding: 0;
-      }
-
-      #about {
-        background-color: transparent;
-        padding-top: 40px;
-        padding-bottom: 80px;
-      }
-
-      #about h2 {
-        color: #ffd700;
-        text-shadow: none;
-        margin-bottom: 30px;
-      }
-
-      .about-content {
-        display: flex;
-        justify-content: center;
-      }
-      .about-text {
-        flex: 1;
-        max-width: 800px;
-        min-width: 300px;
-        text-align: left;
-        line-height: 1.8;
-        color: #f0f0f0;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 30px;
-        border-radius: 8px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #1a1a1a;
-      }
-      .about-text:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
-      }
-
-      .features-grid,
-      .roadmap-phases,
-      .team-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-      }
-      .feature-item,
-      .roadmap-phase,
-      .team-member-card {
-        background-color: rgba(15, 15, 15, 0.65);
-        padding: 25px;
-        border-radius: 8px;
-        flex-basis: 300px;
-        border: 1px solid #2a2a2a;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .feature-item:hover,
-      .roadmap-phase:hover,
-      .team-member-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
-      }
-
-      .feature-item h3,
-      .roadmap-phase h3 {
-        color: #ffd700;
-        margin-bottom: 15px;
-      }
-      .roadmap-phase ul {
-        list-style: disc;
-        margin-left: 20px;
-        text-align: left;
-        padding-left: 5px;
-      }
-      .roadmap-phase ul li {
-        margin-bottom: 8px;
-      }
-
-      #airdrop {
-        position: relative;
-        background-color: transparent;
-      }
-
-      #airdrop .container {
-        position: relative;
-        z-index: 1;
-      }
-
-      #airdrop .container h2 {
-        font-size: 2.5em;
-        margin-bottom: 15px;
-        color: #ffd700;
-      }
-
-      .airdrop-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .airdrop-logo-img {
-        display: block;
-        margin: 0 auto 25px auto;
-        max-width: 180px;
-        height: auto;
-      }
-
-      .airdrop-info-wrapper {
-        padding: 30px;
-        text-align: center;
-        border-radius: 10px;
-        width: 100%;
-        max-width: 550px;
-        box-sizing: border-box;
-        background-color: rgba(15, 15, 15, 0.65);
-        border: 1px solid #2a2a2a;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .airdrop-info-wrapper:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
-      }
-
-      .airdrop-info-wrapper h3 {
-        color: #ffd700;
-        margin-top: 0;
-      }
-      .airdrop-info-wrapper p {
-        color: #f0f0f0;
-        margin-bottom: 15px;
-      }
-
-      .team-member-card img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center top;
-        margin-bottom: 15px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .team-member-card img.enlarge-trigger {
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out;
-      }
-      .team-member-card img.enlarge-trigger:hover {
-        transform: scale(1.05);
-      }
-
-      .team-member-card h4 {
-        margin-bottom: 5px;
-      }
-      .team-member-card p {
-        font-size: 0.9em;
-        color: #ccc;
-      }
-
-      .community-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        background-color: transparent;
-        margin-top: 30px;
-      }
-      .community-links a {
-        display: inline-block;
-        margin: 5px;
-        padding: 12px 25px;
-        background-color: rgba(15, 15, 15, 0.65);
-        border: 1px solid #2a2a2a;
-        border-radius: 5px;
-        text-decoration: none;
-        color: #f0f0f0;
-        transition: background-color 0.3s ease, color 0.3s ease,
-          border-color 0.3s ease, transform 0.3s ease;
-      }
-      .community-links a:hover {
-        background-color: #ffd700;
-        color: #121212;
-        border-color: #ffd700;
-        transform: translateY(-3px);
-      }
-
-      footer {
-        background-color: transparent;
-        text-align: center;
-        padding: 40px 20px;
-        margin-top: 40px;
-        border-top: 1px solid #1f1f1f;
-      }
-      footer p {
-        margin: 0;
-        color: #aaa;
-        font-size: 0.9em;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1001;
-        padding-top: 60px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.9);
-      }
-
-      .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 450px;
-        animation-name: zoom;
-        animation-duration: 0.4s;
-      }
-
-      @keyframes zoom {
-        from {
-          transform: scale(0);
+        html {
+            scroll-behavior: smooth;
         }
-        to {
-          transform: scale(1);
-        }
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-      }
-
-      .modal-close:hover,
-      .modal-close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .modal-caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 450px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-        height: auto;
-        min-height: 50px;
-      }
-
-      #tokenomics .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-      }
-      .token-details,
-      .token-chart-container {
-        background-color: rgba(15, 15, 15, 0.65);
-        padding: 25px;
-        border-radius: 8px;
-        width: 100%;
-        max-width: 800px;
-        border: 1px solid #2a2a2a;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .token-details:hover,
-      .token-chart-container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
-      }
-      .token-details p {
-        margin-bottom: 10px;
-        line-height: 1.6;
-        text-align: left;
-      }
-      .token-details strong {
-        color: #ffd700;
-      }
-
-      .chart-title {
-        color: #ffd700;
-        margin-bottom: 20px;
-        font-size: 1.5em;
-      }
-
-      /* New Pie Chart Styles */
-      .pie-chart-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 50px;
-        flex-wrap: wrap;
-      }
-
-      .pie-chart {
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        background-image: conic-gradient(
-          #ffd700 0% 55%,
-          /* Liquidity */ #f0c400 55% 75%,
-          /* Ecosystem */ #d1a300 75% 85%,
-          /* CEX/Marketing */ #b38300 85% 93%,
-          /* Buyback/Burn */ #946a00 93% 98%,
-          /* Airdrop */ #755200 98% 100% /* Team */
-        );
-        flex-shrink: 0;
-        border: 4px solid #2a2a2a;
-      }
-
-      .pie-chart-legend {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .pie-chart-legend li {
-        display: flex;
-        align-items: center;
-        font-size: 1em;
-        color: #f0f0f0;
-      }
-
-      .legend-color {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border-radius: 3px;
-        margin-right: 12px;
-        border: 1px solid #444;
-      }
-
-      .faq-item {
-        background-color: rgba(15, 15, 15, 0.65);
-        border: 1px solid #2a2a2a;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        text-align: left;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .faq-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
-      }
-      .faq-item h3 {
-        color: #ffd700;
-        margin-top: 0;
-        margin-bottom: 10px;
-      }
-
-      .fade-in-section {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        will-change: opacity, transform;
-      }
-      .fade-in-section.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      @media (max-width: 768px) {
-        body {
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center 80px; /* Shift down by 80px */
-        }
-
-        header {
-          padding: 15px;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-          align-items: center;
-          position: sticky; /* Keep it sticky */
-          top: 0; /* Ensure it sticks to the top */
-          width: 100%; /* Ensure it spans full width */
-          box-sizing: border-box; /* Include padding in width */
-        }
-
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: #f0f0f0; 
+            background-image: url('yeldex2.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center center; /* Default for desktop */
+            background-repeat: no-repeat;
+            background-color: #000000; 
+        } 
+        header { 
+            background-color: rgba(0,0,0,0.85); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; /* Already sticky */
+            top: 0; 
+            z-index: 1000; 
+        } 
+        
         .logo-container {
-          order: 1;
+            display: flex;
+            align-items: center;
+            text-decoration: none; /* Removes underline from link */
+        }
+        .logo-gif {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+            color: #FFD700; 
+            line-height: 1.1;
+        }
+        .logo-subtitle {
+            font-size: 9px;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
+        }
+        
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+        }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: #f0f0f0; font-weight: bold; transition: color 0.3s ease; }
+        nav ul li a:hover { color: #FFD700; } 
+
+        .menu-toggle { 
+            display: none; 
+            font-size: 2em; 
+            color: #FFD700; 
+            cursor: pointer; 
+            background: none;
+            border: none;
         }
 
-        .menu-toggle {
-          display: block;
-          order: 3;
+        .hero {
+            position: relative;
+            height: 95vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            padding-top: 8vh; 
+            box-sizing: border-box;
+            overflow: hidden;
+            background-color: transparent; 
         }
 
-        nav {
-          order: 2;
+        .hero-content { 
+            z-index: 1; 
+            background-color: rgba(0,0,0,0.6); 
+            padding: 30px; 
+            border-radius: 10px; 
+        }
+        
+        .hero h1 { font-size: 3em; margin-bottom: 20px; color: #fff; }
+        .hero p { font-size: 1.2em; margin-bottom: 30px; color: #ddd; }
+        .btn { background-color: #FFD700; color: #121212; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease; margin: 5px; display: inline-block;} 
+        .btn:hover { background-color: #E6C300; color: #121212; transform: translateY(-2px); } 
+        .btn-secondary { background-color: transparent; border: 2px solid #FFD700; color: #FFD700; } 
+        .btn-secondary:hover { background-color: #FFD700; color: #121212; transform: translateY(-2px); } 
+
+        .hero-socials {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+        .hero-socials a {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            transition: transform 0.3s ease;
+        }
+        .hero-socials a:hover {
+            transform: scale(1.15);
+        }
+        .hero-socials svg {
+            width: 100%;
+            height: 100%;
+            fill: #f0f0f0;
+            transition: fill 0.3s ease;
+        }
+        .hero-socials a:hover svg {
+            fill: #FFD700;
         }
 
-        nav ul {
-          display: none;
-          flex-direction: column;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.95);
-          position: absolute; /* Position relative to header */
-          top: 70px; /* Place it below the header */
-          left: 0;
-          padding: 10px 0;
-        }
-        nav ul.active {
-          display: flex;
-        }
-        nav ul li {
-          margin-left: 0;
-          width: 100%;
-          text-align: center;
-          padding: 10px 0;
-        }
-        nav ul li a {
-          display: block;
-          width: 100%;
-        }
-
-        .hero h1 {
-          font-size: 2.2em;
-        }
-        .hero p {
-          font-size: 1em;
-        }
-        .btn {
-          padding: 12px 20px;
-          font-size: 0.9em;
-        }
-        .section h2 {
-          font-size: 2em;
-          margin-bottom: 30px;
-        }
-        .feature-item,
-        .roadmap-phase,
-        .team-member-card,
-        .about-text,
-        .token-details,
-        .token-chart-container,
-        .airdrop-info-wrapper,
-        .faq-item {
-          flex-basis: 90%;
-          margin-left: auto;
-          margin-right: auto;
-        }
+        .section { padding: 60px 20px; text-align: center; background-color: transparent; } 
+        .section h2 { font-size: 2.5em; margin-bottom: 40px; color: #FFD700; } 
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        
         #image-banner-yeldex2 {
-          height: 30vh;
+            background-image: none; 
+            background-color: transparent; 
+            height: 30vh; 
+            padding: 0; 
+        }
+        
+        #about {
+            background-color: transparent; 
+            padding-top: 40px; 
+            padding-bottom: 80px;
+        }
+        
+        #about h2 {
+            color: #FFD700; 
+            text-shadow: none; 
+            margin-bottom: 30px;
         }
 
-        .pie-chart-wrapper {
-          flex-direction: column;
-          gap: 30px;
+        .about-content { 
+            display: flex;
+            justify-content: center;
         }
-        .pie-chart {
-          width: 200px;
-          height: 200px;
+        .about-text { 
+            flex: 1; 
+            max-width: 800px; 
+            min-width: 300px; 
+            text-align: left; 
+            line-height: 1.8;
+            color: #f0f0f0; 
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 30px; 
+            border-radius: 8px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #1a1a1a;
+        }
+        .about-text:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
+        }
+        
+        .features-grid, .roadmap-phases, .team-grid { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+        }
+        .feature-item, .roadmap-phase, .team-member-card { 
+            background-color: rgba(15, 15, 15, 0.65); 
+            padding: 25px; 
+            border-radius: 8px; 
+            flex-basis: 300px; 
+            border: 1px solid #2a2a2a; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        } 
+        .feature-item:hover, .roadmap-phase:hover, .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .feature-item h3, .roadmap-phase h3 { color: #FFD700; margin-bottom: 15px;} 
+        .roadmap-phase ul { list-style: disc; margin-left: 20px; text-align: left; padding-left: 5px;}
+        .roadmap-phase ul li { margin-bottom: 8px; }
+        
+        #airdrop {
+            position: relative; 
+            background-color: transparent; 
+        }
+        
+        #airdrop .container { 
+            position: relative;
+            z-index: 1; 
+        }
+        
+        #airdrop .container h2 { 
+            font-size: 2.5em; 
+            margin-bottom: 15px; 
+            color: #FFD700; 
+        }
+
+        .airdrop-content { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .airdrop-logo-img { 
+            display: block;
+            margin: 0 auto 25px auto; 
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .airdrop-info-wrapper {
+            padding: 30px; 
+            text-align: center;
+            border-radius: 10px; 
+            width: 100%; 
+            max-width: 550px; 
+            box-sizing: border-box;
+            background-color: rgba(15, 15, 15, 0.65); 
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .airdrop-info-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
+        }
+
+
+        .airdrop-info-wrapper h3 {
+            color: #FFD700; 
+            margin-top: 0; 
+        }
+        .airdrop-info-wrapper p {
+            color: #f0f0f0; 
+            margin-bottom: 15px;
+        }
+        
+        .team-member-card img {
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            object-position: center top; 
+            margin-bottom: 15px; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .team-member-card img.enlarge-trigger {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .team-member-card img.enlarge-trigger:hover {
+            transform: scale(1.05); 
+        }
+
+        .team-member-card h4 { margin-bottom: 5px; }
+        .team-member-card p { font-size: 0.9em; color: #ccc; }
+        
+        .community-links { 
+              display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
+              background-color: transparent;
+              margin-top: 30px;
+        }
+        .community-links a { 
+            display: inline-block; 
+            margin: 5px; 
+            padding: 12px 25px; 
+            background-color: rgba(15, 15, 15, 0.65); 
+            border: 1px solid #2a2a2a; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            color: #f0f0f0; 
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        } 
+        .community-links a:hover { 
+            background-color: #FFD700; 
+            color: #121212; 
+            border-color: #FFD700; 
+            transform: translateY(-3px);
+        } 
+        
+        footer { background-color: transparent; text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 1px solid #1F1F1F;} 
+        footer p { margin: 0; color: #aaa; font-size: 0.9em; }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1001; 
+            padding-top: 60px; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9); 
         }
 
         .modal-content {
-          max-width: 90%;
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 450px; 
+            animation-name: zoom;
+            animation-duration: 0.4s;
         }
-        .logo-gif {
-          width: 30px;
-          height: 30px;
-          margin-right: 5px;
-        }
-        .logo {
-          font-size: 1.5em;
-        }
-      }
 
-      @media (max-width: 480px) {
-        .hero-content {
-          padding: 20px;
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
         }
-        .hero h1 {
-          font-size: 1.8em;
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
         }
-        .about-text {
-          padding: 20px;
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
         }
-        .airdrop-info-wrapper {
-          padding: 20px;
+
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 450px; 
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: auto; 
+            min-height: 50px; 
         }
-        .token-details,
-        .token-chart-container,
+
+        #tokenomics .container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 40px;
+        }
+        .token-details, .token-chart-container {
+            background-color: rgba(15, 15, 15, 0.65);
+            padding: 25px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+         .token-details:hover, .token-chart-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
+        }
+        .token-details p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .token-details strong {
+            color: #FFD700;
+        }
+        
+        .chart-title {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        /* New Pie Chart Styles */
+        .pie-chart-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .pie-chart {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-image: conic-gradient(
+                #FFD700 0% 55%,      /* Liquidity */
+                #f0c400 55% 75%,      /* Ecosystem */
+                #d1a300 75% 85%,      /* CEX/Marketing */
+                #b38300 85% 93%,      /* Buyback/Burn */
+                #946a00 93% 98%,      /* Airdrop */
+                #755200 98% 100%       /* Team */
+            );
+            flex-shrink: 0;
+            border: 4px solid #2a2a2a;
+        }
+
+        .pie-chart-legend {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pie-chart-legend li {
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            color: #f0f0f0;
+        }
+
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 12px;
+            border: 1px solid #444;
+        }
+        
         .faq-item {
-          padding: 15px;
+            background-color: rgba(15, 15, 15, 0.65); 
+            border: 1px solid #2a2a2a; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .section {
-          padding: 40px 15px;
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.1);
         }
-        .section h2 {
-          font-size: 1.8em;
-          margin-bottom: 25px;
+        .faq-item h3 {
+            color: #FFD700; 
+            margin-top:0;
+            margin-bottom: 10px;
         }
-        .logo-gif {
-          width: 25px;
-          height: 25px;
-          margin-right: 8px; /* Slightly more space */
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
-        .logo {
-          font-size: 1.4em; /* Adjusted for better fit */
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .logo-subtitle {
-          display: none;
+
+        @media (max-width: 768px) {
+            body {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center 80px; /* Shift down by 80px */
+            }
+
+            header { 
+                padding: 15px; 
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: center;
+                position: sticky; /* Keep it sticky */
+                top: 0; /* Ensure it sticks to the top */
+                width: 100%; /* Ensure it spans full width */
+                box-sizing: border-box; /* Include padding in width */
+            }
+            
+            .logo-container {
+                order: 1; 
+            }
+
+            .menu-toggle { 
+                display: block; 
+                order: 3;
+            }
+
+            nav {
+                order: 2; 
+            }
+
+            nav ul { 
+                display: none; 
+                flex-direction: column;
+                width: 100%;
+                background-color: rgba(0,0,0,0.95);
+                position: absolute; /* Position relative to header */
+                top: 70px; /* Place it below the header */
+                left: 0;
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li { 
+                margin-left: 0; 
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+            nav ul li a {
+                display: block;
+                width: 100%;
+            }
+
+            .hero h1 { font-size: 2.2em; }
+            .hero p { font-size: 1em; }
+            .btn { padding: 12px 20px; font-size: 0.9em;}
+            .section h2 { font-size: 2em; margin-bottom: 30px; }
+            .feature-item, .roadmap-phase, .team-member-card, .about-text, .token-details, .token-chart-container, .airdrop-info-wrapper, .faq-item {
+                flex-basis: 90%; 
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #image-banner-yeldex2 { height: 30vh; } 
+            
+            .pie-chart-wrapper {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .pie-chart {
+                width: 200px;
+                height: 200px;
+            }
+
+            .modal-content {
+                max-width: 90%; 
+            }
+             .logo-gif {
+                 width: 30px;
+                 height: 30px;
+                 margin-right: 5px;
+             }
+             .logo {
+                 font-size: 1.5em;
+             }
         }
-      }
+
+        @media (max-width: 480px) {
+             .hero-content { padding: 20px; }
+             .hero h1 { font-size: 1.8em; }
+             .about-text { padding: 20px; } 
+             .airdrop-info-wrapper { padding: 20px; }
+             .token-details, .token-chart-container, .faq-item { padding: 15px; }
+             .section { padding: 40px 15px; }
+             .section h2 { font-size: 1.8em; margin-bottom: 25px; }
+             .logo-gif {
+                 width: 25px;
+                 height: 25px;
+                 margin-right: 8px; /* Slightly more space */
+             }
+             .logo {
+                 font-size: 1.4em; /* Adjusted for better fit */
+             }
+             .logo-subtitle {
+                 display: none;
+             }
+        }
+
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
     <header>
-      <a href="#hero" class="logo-container">
-        <img
-          src="logo-animasi.gif"
-          alt="Yeldex Coin Animation"
-          class="logo-gif"
-          onerror="this.onerror=null;this.src='https://placehold.co/40x40/000000/FFD700?text=Y';"
-        />
-        <div class="logo-text-wrapper">
-          <div class="logo">YELDEX</div>
-          <div class="logo-subtitle">THE NEXT-GEN DEFI PLATFORM</div>
-        </div>
-      </a>
-      <button
-        class="menu-toggle"
-        id="mobile-menu"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-      >
-        &#9776;
-      </button>
-      <nav>
-        <ul id="nav-menu">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#airdrop">Airdrop</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#community">Community</a></li>
-          <li>
-            <a
-              href="https://yeldex.gitbook.io/yeldex-docs"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Whitepaper</a
-            >
-          </li>
-        </ul>
-      </nav>
+        <a href="#hero" class="logo-container">
+            <img src="logo-animasi.gif" alt="Yeldex Coin Animation" class="logo-gif" onerror="this.onerror=null;this.src='https://placehold.co/40x40/000000/FFD700?text=Y';">
+            <div class="logo-text-wrapper">
+                <div class="logo">YELDEX</div>
+                <div class="logo-subtitle">THE NEXT-GEN DEFI PLATFORM</div>
+            </div>
+        </a>
+        <button class="menu-toggle" id="mobile-menu" aria-label="Open navigation menu" aria-expanded="false">
+            &#9776; 
+        </button>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li> 
+                <li><a href="#airdrop">Airdrop</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="https://yeldex.gitbook.io/yeldex-docs" target="_blank" rel="noopener noreferrer">Whitepaper</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section id="hero" class="hero">
-      <div class="hero-content fade-in-section">
-        <h1>YELDEX</h1>
-        <p>The Future of Decentralized Finance on Binance Smart Chain</p>
-        <a href="#airdrop" class="btn">Claim $YLDX Airdrop</a>
-        <a
-          href="https://yeldex.gitbook.io/yeldex-docs"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-secondary"
-          >Read Whitepaper</a
-        >
+        <div class="hero-content fade-in-section">
+            <h1>YELDEX</h1>
+            <p>The Future of Decentralized Finance on Binance Smart Chain</p>
+            <a href="#airdrop" class="btn">Claim $YLDX Airdrop</a>
+            <a href="https://yeldex.gitbook.io/yeldex-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Read Whitepaper</a>
+            
+            <div class="hero-socials">
+                <a href="https://t.me/yeldex" target="_blank" rel="noopener noreferrer" aria-label="Telegram Channel">
+                    <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 11.9c-.88-.25-.89-1.39.2-1.61l15.97-5.85c.73-.27 1.36.17 1.15.99l-2.28 10.74c-.22.99-1.01 1.24-1.74.77l-4.93-3.6-2.4 2.31c-.26.25-.49.49-.97.49z"/></svg>
+                </a>
+                <a href="https://t.me/Yeldexchat" target="_blank" rel="noopener noreferrer" aria-label="Telegram Group">
+                    <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 11.9c-.88-.25-.89-1.39.2-1.61l15.97-5.85c.73-.27 1.36.17 1.15.99l-2.28 10.74c-.22.99-1.01 1.24-1.74.77l-4.93-3.6-2.4 2.31c-.26.25-.49.49-.97.49z"/></svg>
+                </a>
+                <a href="https://x.com/YeldexCoin" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
 
-        <div class="hero-socials">
-          <a
-            href="https://t.me/yeldex"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Telegram Channel"
-          >
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 11.9c-.88-.25-.89-1.39.2-1.61l15.97-5.85c.73-.27 1.36.17 1.15.99l-2.28 10.74c-.22.99-1.01 1.24-1.74.77l-4.93-3.6-2.4 2.31c-.26.25-.49.49-.97.49z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://t.me/Yeldexchat"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Telegram Group"
-          >
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 11.9c-.88-.25-.89-1.39.2-1.61l15.97-5.85c.73-.27 1.36.17 1.15.99l-2.28 10.74c-.22.99-1.01 1.24-1.74.77l-4.93-3.6-2.4 2.31c-.26.25-.49.49-.97.49z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://x.com/YeldexCoin"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (Twitter)"
-          >
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-              />
-            </svg>
-          </a>
         </div>
-      </div>
     </section>
 
-    <section id="image-banner-yeldex2" class="section"></section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">What is Yeldex?</h2>
-        <div class="about-content fade-in-section">
-          <div class="about-text">
-            <p>
-              Welcome to Yeldex, your next-generation DeFi hub on the Binance
-              Smart Chain. We're revolutionizing decentralized finance by
-              seamlessly integrating a robust DEX, lucrative farming
-              opportunities, secure staking, and efficient liquidity
-              provisioning.
-            </p>
-            <p>
-              Our platform is powered by advanced smart contracts featuring
-              innovative auto-compounding and robust impermanent loss
-              protection, ensuring an optimal and efficient DeFi experience for
-              all users.
-            </p>
-            <p>
-              At the heart of our ecosystem is the <strong>$YLDX token</strong>,
-              designed to reward our community, facilitate staking, empower
-              governance, and offer exciting APR boosts.
-            </p>
-          </div>
-        </div>
-      </div>
+    <section id="image-banner-yeldex2" class="section">
     </section>
 
-    <section id="features" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">Platform Highlights</h2>
-        <div class="features-grid fade-in-section">
-          <div class="feature-item">
-            <div style="font-size: 2em; margin-bottom: 10px">⚙️</div>
-            <h3>Decentralized Exchange (DEX)</h3>
-            <p>
-              Swap your favorite tokens seamlessly and securely on our native
-              DEX.
-            </p>
-          </div>
-          <div class="feature-item">
-            <div style="font-size: 2em; margin-bottom: 10px">🌾</div>
-            <h3>Yield Farming</h3>
-            <p>
-              Maximize your returns by providing liquidity and farming $YLDX
-              rewards.
-            </p>
-          </div>
-          <div class="feature-item">
-            <div style="font-size: 2em; margin-bottom: 10px">🔒</div>
-            <h3>Staking Pools</h3>
-            <p>
-              Stake your $YLDX tokens to earn passive income and platform
-              rewards.
-            </p>
-          </div>
-          <div class="feature-item">
-            <div style="font-size: 2em; margin-bottom: 10px">📜</div>
-            <h3>Advanced Smart Contracts</h3>
-            <p>
-              Benefit from auto-compounding features and impermanent loss
-              protection.
-            </p>
-          </div>
-          <div class="feature-item">
-            <div style="font-size: 2em; margin-bottom: 10px">💎</div>
-            <h3>$YLDX Token Utility</h3>
-            <p>
-              Powering rewards, staking, governance, and exclusive APR boosts.
-            </p>
-          </div>
+    <section id="about" class="section"> 
+        <div class="container">
+            <h2 class="fade-in-section">What is Yeldex?</h2>
+            <div class="about-content fade-in-section">
+                <div class="about-text">
+                    <p>Welcome to Yeldex, your next-generation DeFi hub on the Binance Smart Chain. We're revolutionizing decentralized finance by seamlessly integrating a robust DEX, lucrative farming opportunities, secure staking, and efficient liquidity provisioning.</p>
+                    <p>Our platform is powered by advanced smart contracts featuring innovative auto-compounding and robust impermanent loss protection, ensuring an optimal and efficient DeFi experience for all users.</p>
+                    <p>At the heart of our ecosystem is the <strong>$YLDX token</strong>, designed to reward our community, facilitate staking, empower governance, and offer exciting APR boosts.</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <section id="features" class="section"> 
+        <div class="container">
+            <h2 class="fade-in-section">Platform Highlights</h2>
+            <div class="features-grid fade-in-section">
+                <div class="feature-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">⚙️</div> 
+                    <h3>Decentralized Exchange (DEX)</h3>
+                    <p>Swap your favorite tokens seamlessly and securely on our native DEX.</p>
+                </div>
+                <div class="feature-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🌾</div>
+                    <h3>Yield Farming</h3>
+                    <p>Maximize your returns by providing liquidity and farming $YLDX rewards.</p>
+                </div>
+                <div class="feature-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🔒</div>
+                    <h3>Staking Pools</h3>
+                    <p>Stake your $YLDX tokens to earn passive income and platform rewards.</p>
+                </div>
+                <div class="feature-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📜</div>
+                    <h3>Advanced Smart Contracts</h3>
+                    <p>Benefit from auto-compounding features and impermanent loss protection.</p>
+                </div>
+                <div class="feature-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">💎</div>
+                    <h3>$YLDX Token Utility</h3>
+                    <p>Powering rewards, staking, governance, and exclusive APR boosts.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="tokenomics" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">Tokenomics</h2>
-        <div class="token-details fade-in-section">
-          <p><strong>Token:</strong> $YLDX (BEP-20)</p>
-          <p><strong>Total Supply:</strong> 100,000,000 $YLDX</p>
-          <p><strong>Decimals:</strong> 18</p>
+        <div class="container">
+            <h2 class="fade-in-section">Tokenomics</h2>
+            <div class="token-details fade-in-section">
+                <p><strong>Token:</strong> $YLDX (BEP-20)</p>
+                <p><strong>Total Supply:</strong> 100,000,000 $YLDX</p>
+                <p><strong>Decimals:</strong> 18</p>
+            </div>
+            <div class="token-chart-container fade-in-section">
+                <h3 class="chart-title">Token Distribution</h3>
+                <div class="pie-chart-wrapper">
+                    <div class="pie-chart"></div>
+                    <ul class="pie-chart-legend">
+                        <li><span class="legend-color" style="background-color: #FFD700;"></span>First Liquidity Pool (55%)</li>
+                        <li><span class="legend-color" style="background-color: #f0c400;"></span>Ecosystem (20%)</li>
+                        <li><span class="legend-color" style="background-color: #d1a300;"></span>CEX, Partnership, Marketing (10%)</li>
+                        <li><span class="legend-color" style="background-color: #b38300;"></span>Buyback/Burn Event (8%)</li>
+                        <li><span class="legend-color" style="background-color: #946a00;"></span>Airdrop/Giveaway (5%)</li>
+                        <li><span class="legend-color" style="background-color: #755200;"></span>Team (2%)</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="token-chart-container fade-in-section">
-          <h3 class="chart-title">Token Distribution</h3>
-          <div class="pie-chart-wrapper">
-            <div class="pie-chart"></div>
-            <ul class="pie-chart-legend">
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #ffd700"
-                ></span
-                >First Liquidity Pool (55%)
-              </li>
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #f0c400"
-                ></span
-                >Ecosystem (20%)
-              </li>
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #d1a300"
-                ></span
-                >CEX, Partnership, Marketing (10%)
-              </li>
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #b38300"
-                ></span
-                >Buyback/Burn Event (8%)
-              </li>
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #946a00"
-                ></span
-                >Airdrop/Giveaway (5%)
-              </li>
-              <li>
-                <span
-                  class="legend-color"
-                  style="background-color: #755200"
-                ></span
-                >Team (2%)
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section id="airdrop" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">$YLDX Airdrop Is Live!</h2>
-        <div class="airdrop-content">
-          <div class="airdrop-info-wrapper fade-in-section">
-            <img
-              src="yeldex_airdrop_logo.jpg"
-              alt="Yeldex Airdrop Logo"
-              class="airdrop-logo-img"
-              onerror="this.onerror=null;this.src='https://placehold.co/180x180/0F0F0F/FFFFFF?text=Airdrop';"
-            />
-            <h3>Earn Free $YLDX Tokens</h3>
-            <p>
-              Complete simple tasks and get rewarded for being an early
-              supporter.
-            </p>
-            <p>
-              Backed by Yeldex, a real DeFi ecosystem with tangible utility.
-            </p>
-            <a
-              href="https://t.me/YELDEX_bot"
-              target="_blank"
-              class="btn"
-              style="margin-top: 20px"
-              >Claim Your Airdrop Now!</a
-            >
-          </div>
+        <div class="container">
+            <h2 class="fade-in-section">$YLDX Airdrop Is Live!</h2>
+            <div class="airdrop-content">
+                <div class="airdrop-info-wrapper fade-in-section"> 
+                    <img src="yeldex_airdrop_logo.jpg" alt="Yeldex Airdrop Logo" class="airdrop-logo-img" onerror="this.onerror=null;this.src='https://placehold.co/180x180/0F0F0F/FFFFFF?text=Airdrop';">
+                    <h3>Earn Free $YLDX Tokens</h3>
+                    <p>Complete simple tasks and get rewarded for being an early supporter.</p>
+                    <p>Backed by Yeldex, a real DeFi ecosystem with tangible utility.</p>
+                    <a href="https://t.me/YELDEX_bot" target="_blank" class="btn" style="margin-top: 20px;">Claim Your Airdrop Now!</a>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="roadmap" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">Our Roadmap</h2>
-        <div class="roadmap-phases fade-in-section">
-          <div class="roadmap-phase">
-            <h3>Phase 1 — Initial Launch Phase</h3>
-            <ul>
-              <li>Setup Official Social Media & Community</li>
-              <li>Airdrop Program (Early Supporters)</li>
-              <li>Deploy Smart Contracts on BSC</li>
-              <li>Launch $YLDX Token via Fair Launch on PancakeSwap</li>
-              <li>Marketing Kickoff & Community Growth</li>
-            </ul>
-          </div>
-          <div class="roadmap-phase">
-            <h3>Phase 2 — Utility Activation Phase</h3>
-            <ul>
-              <li>Launch Yeldex DEX (Token Swap Live)</li>
-              <li>Enable Yield Farming Pools</li>
-              <li>Staking Functionality for $YLDX</li>
-              <li>Liquidity Pool Provisioning Incentives</li>
-              <li>Listing on Tracking Platforms (CoinGecko, CMC, etc.)</li>
-            </ul>
-          </div>
-          <div class="roadmap-phase">
-            <h3>Phase 3 — Ecosystem Expansion</h3>
-            <ul>
-              <li>First Community DAO Vote</li>
-              <li>Launch Community Farming Pools</li>
-              <li>Integrate Auto-Compound Vaults</li>
-              <li>Introduce NFT Rewards & Badges</li>
-              <li>Governance DAO Refinement</li>
-            </ul>
-          </div>
-          <div class="roadmap-phase">
-            <h3>Phase 4 — Cross-Chain & Scaling Phase</h3>
-            <ul>
-              <li>Bridge to Layer 2 Networks (Arbitrum, Base, zkSync)</li>
-              <li>Smart Strategy Farming Mode</li>
-              <li>Multichain Token Support</li>
-              <li>Launch Partner Pool Program</li>
-            </ul>
-          </div>
-          <div class="roadmap-phase">
-            <h3>Phase 5 — Visionary Phase (Coming Soon)</h3>
-            <ul>
-              <li>YeldexChain: Our Future Layer 2 Built on Ethereum</li>
-              <li>Research & Feasibility Study</li>
-              <li>Testnet Deployment using Optimism/zkStack</li>
-              <li>Ecosystem Grants for L2 Builders</li>
-              <li>DAO Vote: L2 Migration Path</li>
-            </ul>
-          </div>
+    <section id="roadmap" class="section"> 
+        <div class="container">
+            <h2 class="fade-in-section">Our Roadmap</h2>
+            <div class="roadmap-phases fade-in-section">
+                <div class="roadmap-phase">
+                    <h3>Phase 1 — Initial Launch Phase</h3>
+                    <ul>
+                        <li>Setup Official Social Media & Community</li>
+                        <li>Airdrop Program (Early Supporters)</li>
+                        <li>Deploy Smart Contracts on BSC</li>
+                        <li>Launch $YLDX Token via Fair Launch on PancakeSwap</li>
+                        <li>Marketing Kickoff & Community Growth</li>
+                    </ul>
+                </div>
+                <div class="roadmap-phase">
+                    <h3>Phase 2 — Utility Activation Phase</h3>
+                    <ul>
+                        <li>Launch Yeldex DEX (Token Swap Live)</li>
+                        <li>Enable Yield Farming Pools</li>
+                        <li>Staking Functionality for $YLDX</li>
+                        <li>Liquidity Pool Provisioning Incentives</li>
+                        <li>Listing on Tracking Platforms (CoinGecko, CMC, etc.)</li>
+                    </ul>
+                </div>
+                <div class="roadmap-phase">
+                    <h3>Phase 3 — Ecosystem Expansion</h3>
+                    <ul>
+                        <li>First Community DAO Vote</li>
+                        <li>Launch Community Farming Pools</li>
+                        <li>Integrate Auto-Compound Vaults</li>
+                        <li>Introduce NFT Rewards & Badges</li>
+                        <li>Governance DAO Refinement</li>
+                    </ul>
+                </div>
+                <div class="roadmap-phase">
+                    <h3>Phase 4 — Cross-Chain & Scaling Phase</h3>
+                    <ul>
+                        <li>Bridge to Layer 2 Networks (Arbitrum, Base, zkSync)</li>
+                        <li>Smart Strategy Farming Mode</li>
+                        <li>Multichain Token Support</li>
+                        <li>Launch Partner Pool Program</li>
+                    </ul>
+                </div>
+                <div class="roadmap-phase">
+                    <h3>Phase 5 — Visionary Phase (Coming Soon)</h3>
+                    <ul>
+                        <li>YeldexChain: Our Future Layer 2 Built on Ethereum</li>
+                        <li>Research & Feasibility Study</li>
+                        <li>Testnet Deployment using Optimism/zkStack</li>
+                        <li>Ecosystem Grants for L2 Builders</li>
+                        <li>DAO Vote: L2 Migration Path</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <section id="faq" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">Frequently Asked Questions (FAQ)</h2>
-        <div class="faq-list fade-in-section">
-          <div class="faq-item">
-            <h3 style="color: #ffd700; margin-top: 0">What is Yeldex?</h3>
-            <p>
-              Yeldex is a DeFi platform on Binance Smart Chain combining DEX,
-              farming, staking, and liquidity provisioning for an efficient DeFi
-              experience.
-            </p>
-          </div>
-          <div class="faq-item">
-            <h3 style="color: #ffd700; margin-top: 0">
-              How can I participate in the Airdrop?
-            </h3>
-            <p>
-              You can participate by clicking the "Claim $YLDX Airdrop" button
-              and following the instructions on our Telegram Bot.
-            </p>
-          </div>
-          <div class="faq-item">
-            <h3 style="color: #ffd700; margin-top: 0">
-              What is the $YLDX token?
-            </h3>
-            <p>
-              The $YLDX token powers rewards, staking, governance, and APR
-              boosts within the Yeldex ecosystem.
-            </p>
-          </div>
+        <div class="container">
+            <h2 class="fade-in-section">Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-list fade-in-section">
+                <div class="faq-item">
+                    <h3 style="color: #FFD700; margin-top:0;">What is Yeldex?</h3>
+                    <p>Yeldex is a DeFi platform on Binance Smart Chain combining DEX, farming, staking, and liquidity provisioning for an efficient DeFi experience.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 style="color: #FFD700; margin-top:0;">How can I participate in the Airdrop?</h3>
+                    <p>You can participate by clicking the "Claim $YLDX Airdrop" button and following the instructions on our Telegram Bot.</p>
+                </div>
+                 <div class="faq-item">
+                    <h3 style="color: #FFD700; margin-top:0;">What is the $YLDX token?</h3>
+                    <p>The $YLDX token powers rewards, staking, governance, and APR boosts within the Yeldex ecosystem.</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <section id="team" class="section">
-      <div class="container">
-        <h2 class="fade-in-section">Meet the Team</h2>
-        <div class="team-grid fade-in-section">
-          <div class="team-member-card">
-            <img
-              src="CEO.jpg"
-              alt="Lukas Meier - Chief Executive Officer"
-              class="enlarge-trigger"
-              onerror="this.onerror=null;this.src='https://placehold.co/150x150/1a1a1a/ffffff?text=CEO';"
-            />
-            <h4>Lukas Meier</h4>
-            <p>Chief Executive Officer</p>
-          </div>
-          <div class="team-member-card">
-            <img
-              src="Dev.jpg"
-              alt="Simon Keller - Lead Developer"
-              class="enlarge-trigger"
-              onerror="this.onerror=null;this.src='https://placehold.co/150x150/1a1a1a/ffffff?text=Dev';"
-            />
-            <h4>Simon Keller</h4>
-            <p>Lead Developer</p>
-          </div>
+        <div class="container">
+            <h2 class="fade-in-section">Meet the Team</h2>
+            <div class="team-grid fade-in-section">
+                <div class="team-member-card">
+                    <img src="CEO.jpg" alt="Lukas Meier - Chief Executive Officer" class="enlarge-trigger" onerror="this.onerror=null;this.src='https://placehold.co/150x150/1a1a1a/ffffff?text=CEO';">
+                    <h4>Lukas Meier</h4>
+                    <p>Chief Executive Officer</p>
+                </div>
+                <div class="team-member-card">
+                    <img src="Dev.jpg" alt="Simon Keller - Lead Developer" class="enlarge-trigger" onerror="this.onerror=null;this.src='https://placehold.co/150x150/1a1a1a/ffffff?text=Dev';">
+                    <h4>Simon Keller</h4>
+                    <p>Lead Developer</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="community" class="section">
-      <div class="container fade-in-section">
-        <h2>Join the Yeldex Revolution</h2>
-        <p>Stay updated and connect with our vibrant community.</p>
-        <div class="community-links">
-          <a
-            href="https://t.me/yeldex"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Telegram Channel</a
-          >
-          <a
-            href="https://t.me/Yeldexchat"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Telegram Group</a
-          >
-          <a
-            href="https://x.com/YeldexCoin"
-            target="_blank"
-            rel="noopener noreferrer"
-            >X (Twitter)</a
-          >
-          <a
-            href="https://t.me/YELDEX_bot"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Airdrop Bot</a
-          >
+    <section id="community" class="section"> 
+        <div class="container fade-in-section">
+            <h2>Join the Yeldex Revolution</h2>
+            <p>Stay updated and connect with our vibrant community.</p>
+            <div class="community-links">
+                <a href="https://t.me/yeldex" target="_blank" rel="noopener noreferrer">Telegram Channel</a>
+                <a href="https://t.me/Yeldexchat" target="_blank" rel="noopener noreferrer">Telegram Group</a>
+                <a href="https://x.com/YeldexCoin" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+                <a href="https://t.me/YELDEX_bot" target="_blank" rel="noopener noreferrer">Airdrop Bot</a>
+            </div>
         </div>
-      </div>
     </section>
 
     <footer>
-      <div class="container">
-        <p>
-          &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          Yeldex. All Rights Reserved.
-        </p>
-      </div>
+        <div class="container">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Yeldex. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <div id="imageModal" class="modal">
-      <span class="modal-close" id="modalCloseBtn">&times;</span>
-      <img class="modal-content" id="modalImageContent" />
-      <div id="modalCaption" class="modal-caption"></div>
+        <span class="modal-close" id="modalCloseBtn">&times;</span>
+        <img class="modal-content" id="modalImageContent">
+        <div id="modalCaption" class="modal-caption"></div>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Modal Logic
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImageContent");
-        const captionText = document.getElementById("modalCaption");
-        const closeModalBtn = document.getElementById("modalCloseBtn");
-        const imagesToEnlarge = document.querySelectorAll(".enlarge-trigger");
+        document.addEventListener('DOMContentLoaded', () => {
 
-        imagesToEnlarge.forEach((img) => {
-          img.onclick = function () {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-          };
-        });
+            // Modal Logic
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImageContent");
+            const captionText = document.getElementById("modalCaption");
+            const closeModalBtn = document.getElementById("modalCloseBtn");
+            const imagesToEnlarge = document.querySelectorAll(".enlarge-trigger");
 
-        closeModalBtn.onclick = function () {
-          modal.style.display = "none";
-        };
+            imagesToEnlarge.forEach(img => {
+                img.onclick = function(){
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt; 
+                }
+            });
 
-        window.onclick = function (event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
-
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById("mobile-menu");
-        const navMenu = document.getElementById("nav-menu");
-        if (mobileMenu && navMenu) {
-          mobileMenu.addEventListener("click", () => {
-            navMenu.classList.toggle("active");
-            const isExpanded = navMenu.classList.contains("active");
-            mobileMenu.setAttribute("aria-expanded", isExpanded);
-          });
-        }
-
-        // --- REVISED REVEAL SCRIPT ---
-        const allFadeInSections = document.querySelectorAll(".fade-in-section");
-        const heroContent = document.querySelector(
-          ".hero-content.fade-in-section"
-        );
-
-        // 1. Special handling for Hero Content
-        // It should fade in on page load without any action.
-        if (heroContent) {
-          setTimeout(() => {
-            heroContent.classList.add("is-visible");
-          }, 100); // A small delay can help ensure the transition is smooth
-        }
-
-        // 2. Handling for all other sections on scroll
-        const observerOptions = {
-          root: null,
-          rootMargin: "0px",
-          threshold: 0.1,
-        };
-
-        const observerCallback = (entries, observer) => {
-          entries.forEach((entry) => {
-            // Skip the hero element because it's handled separately
-            if (entry.target === heroContent) {
-              return;
+            closeModalBtn.onclick = function() {
+                modal.style.display = "none";
             }
 
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-          });
-        };
 
-        const observer = new IntersectionObserver(
-          observerCallback,
-          observerOptions
-        );
+            // Mobile Menu Toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            if (mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    const isExpanded = navMenu.classList.contains('active');
+                    mobileMenu.setAttribute('aria-expanded', isExpanded);
+                });
+            }
 
-        // Observe all sections. The callback will filter out the hero.
-        allFadeInSections.forEach((el) => {
-          if (el !== heroContent) {
-            observer.observe(el);
-          }
+            // --- REVISED REVEAL SCRIPT ---
+            const allFadeInSections = document.querySelectorAll('.fade-in-section');
+            const heroContent = document.querySelector('.hero-content.fade-in-section');
+            
+            // 1. Special handling for Hero Content
+            // It should fade in on page load without any action.
+            if(heroContent) {
+                setTimeout(() => {
+                    heroContent.classList.add('is-visible');
+                }, 100); // A small delay can help ensure the transition is smooth
+            }
+            
+            // 2. Handling for all other sections on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    // Skip the hero element because it's handled separately
+                    if (entry.target === heroContent) {
+                        return;
+                    }
+
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            
+            // Observe all sections. The callback will filter out the hero.
+            allFadeInSections.forEach(el => {
+                 if (el !== heroContent) {
+                    observer.observe(el);
+                }
+            });
         });
-      });
     </script>
-  </body>
+</body>
 </html>
